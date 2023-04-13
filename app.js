@@ -1,13 +1,16 @@
+require('dotenv').config();
 const express = require('express');
+const dbConect = require('./db');
+const cors = require('cors');
+const Book = require('./models/book');
+const bookRouter = require('./routes/book');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  console.log('peticion recibida');
-  res.send('hola');
-});
+dbConect(app);
 
-const PUERTO = process.env.PORT || 3000;
-app.listen(PUERTO, () => {
-  console.log(`El servidor esta esuchando en el puerto ${PUERTO}...`);
-});
+app.use(cors({ origin: true }));
+
+app.use(express.json());
+
+app.use('/api/v1/books', bookRouter);
