@@ -3,7 +3,7 @@ const Book = require('../models/book');
 const getBooks = async (req, res) => {
   const books = await Book.find();
 
-  res.status(200).json({ ok: true, data: books.length });
+  res.status(200).json({ ok: true, books, count: books.length });
 };
 
 const createBook = (req, res) => {
@@ -18,8 +18,8 @@ const createBook = (req, res) => {
 
   newBook
     .save()
-    .then((product) => {
-      res.status(201).json({ ok: true, product });
+    .then((book) => {
+      res.status(201).json({ ok: true, book });
     })
     .catch((err) => console.log(err));
 };

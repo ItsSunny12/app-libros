@@ -3,6 +3,7 @@ const booksSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
     author: { type: String, required: true },
+    price: Number,
   },
   { timestamps: true }
 );
